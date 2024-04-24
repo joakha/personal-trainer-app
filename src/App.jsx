@@ -1,11 +1,6 @@
 import { Link, Outlet } from 'react-router-dom';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import { CssBaseline } from '@mui/material';
-import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
-import { Button, Menu } from '@mui/material';
+import { Button, Menu, MenuItem, CssBaseline, Typography, Toolbar, AppBar } from '@mui/material';
 
 function App() {
 

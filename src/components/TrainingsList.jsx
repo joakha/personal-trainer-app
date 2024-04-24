@@ -2,26 +2,33 @@ import { useEffect, useState } from "react";
 import { AgGridReact } from "ag-grid-react"
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
-import { Stack } from "@mui/material";
+import { Stack, Button, Snackbar } from "@mui/material";
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 const TrainingsList = () => {
 
-    const [loading, setLoading] = useState([true]);
+    const [loading, setLoading] = useState();
     const [trainings, setTrainings] = useState([]);
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [msgSnackbar, setMsgSnackbar] = useState("");
     const [colDefs, setColDefs] = useState([
         { field: "date", filter: true, floatingFilter: true, valueFormatter: params => new Date(params.value).toLocaleDateString("fi-FI") },
         { field: "duration", filter: true, floatingFilter: true, valueGetter: params => params.data.duration + " minutes" },
         { field: "activity", filter: true, floatingFilter: true },
         { headerName: "Customer Firstname", field: "customer.firstname", filter: true, floatingFilter: true },
         { headerName: "Customer Lastname", field: "customer.lastname", filter: true, floatingFilter: true },
+        {
+            cellRenderer: params => <Button size="small" color="error"
+                onClick={() => deleteTraining(params)}>Delete</Button>
+        }
     ]
     );
 
     const getTrainings = async () => {
 
         try {
+            setLoading(true);
             const response = await fetch("https://customerrestservice-personaltraining.rahtiapp.fi/gettrainings");
             const trainingsData = await response.json();
             setTrainings(trainingsData);
@@ -30,7 +37,31 @@ const TrainingsList = () => {
         catch (error) {
             console.error(error);
         }
+    }
 
+    const deleteTraining = async (params) => {
+
+        if (confirm("Are you sure you want to delete this training?")) {
+
+            try {
+                const response = await fetch(`https://customerrestservice-personaltraining.rahtiapp.fi/api/trainings/${params.data.id}`, { method: "DELETE" });
+
+                if (response.ok) {
+                    setMsgSnackbar("Training deleted successfully");
+                    setOpenSnackbar(true);
+                    getTrainings();
+                }
+
+                else {
+                    setMsgSnackbar("Unable to delete training!")
+                    setOpenSnackbar(true);
+                }
+            }
+
+            catch (error) {
+                console.error(error);
+            }
+        }
     }
 
     useEffect(() => {
@@ -53,6 +84,8 @@ const TrainingsList = () => {
                             <AgGridReact rowData={trainings} columnDefs={colDefs} pagination={true} paginationPageSize={20} />
                         </LocalizationProvider>
                     </div>
+                    <Snackbar open={openSnackbar} message={msgSnackbar} autoHideDuration={3000} onClose={() => setOpenSnackbar(false)}>
+                    </Snackbar>
                 </>
 
             }
