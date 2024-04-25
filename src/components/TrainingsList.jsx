@@ -19,7 +19,7 @@ const TrainingsList = () => {
         { headerName: "Customer Firstname", field: "customer.firstname", filter: true, floatingFilter: true },
         { headerName: "Customer Lastname", field: "customer.lastname", filter: true, floatingFilter: true },
         {
-            cellRenderer: params => <Button size="small" color="error"
+            cellRenderer: params => <Button size="small" variant="contained" color="error"
                 onClick={() => deleteTraining(params)}>Delete</Button>
         }
     ]
@@ -74,20 +74,19 @@ const TrainingsList = () => {
 
         <Stack justifyContent="center" alignItems="center">
 
-            {loading ? <p>Loading trainings...</p> :
+            <h1>Trainings</h1>
 
-                <>
-                    <h1>Trainings</h1>
-
-                    <div className="ag-theme-material" style={{ width: 1620, height: 1000 }}>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <AgGridReact rowData={trainings} columnDefs={colDefs} pagination={true} paginationPageSize={20} />
-                        </LocalizationProvider>
-                    </div>
-                    <Snackbar open={openSnackbar} message={msgSnackbar} autoHideDuration={3000} onClose={() => setOpenSnackbar(false)}>
-                    </Snackbar>
-                </>
-
+            {
+                loading ? <p>Loading trainings...</p> :
+                    <>
+                        <div className="ag-theme-material" style={{ width: 1620, height: 1000 }}>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <AgGridReact rowData={trainings} columnDefs={colDefs} pagination={true} paginationPageSize={20} />
+                            </LocalizationProvider>
+                        </div>
+                        <Snackbar open={openSnackbar} message={msgSnackbar} autoHideDuration={3000} onClose={() => setOpenSnackbar(false)}>
+                        </Snackbar>
+                    </>
             }
 
         </Stack>
