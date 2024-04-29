@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { AgGridReact } from "ag-grid-react"
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
@@ -12,6 +12,18 @@ const CustomerList = () => {
     const [customers, setCustomers] = useState([]);
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [msgSnackbar, setMsgSnackbar] = useState("");
+    const gridRef = useRef(null);
+    const csvParams = {
+        columnKeys: [
+            "firstname",
+            "lastname",
+            "streetaddress",
+            "postcode",
+            "city",
+            "email",
+            "phone"
+        ]
+    }
     const [colDefs, setColDefs] = useState([
         { headerName: "First Name", field: "firstname", filter: true, floatingFilter: true },
         { headerName: "Last Name", field: "lastname", filter: true, floatingFilter: true },
@@ -24,7 +36,7 @@ const CustomerList = () => {
             width: "100", cellRenderer: params => <EditCustomer editCustomer={editCustomer} params={params} />
         },
         {
-            width: "125", cellRenderer: params => <Button size="small" sx={{padding: "6px", marginBottom: "5px"}} variant="contained" color="error"
+            width: "125", cellRenderer: params => <Button size="small" sx={{ padding: "6px", marginBottom: "5px" }} variant="contained" color="error"
                 onClick={() => deleteCustomer(params)}>Delete</Button>
         }
     ]
@@ -119,6 +131,10 @@ const CustomerList = () => {
         }
     }
 
+    const exportData = (params) => {
+        gridRef.current.api.exportDataAsCsv(params);
+    }
+
     useEffect(() => {
 
         getCustomers();
@@ -134,10 +150,14 @@ const CustomerList = () => {
             {
                 loading ? <p>Loading customers...</p> :
                     <>
-                        <AddCustomer addCustomer={addCustomer} />
+
+                        <div style={{ display:"flex", justifyContent: "center", gap: 5 }}>
+                            <AddCustomer addCustomer={addCustomer} />
+                            <Button variant="contained" style={{ marginTop: "5px", marginBottom: "50px", backgroundColor: "rgb(0, 204, 153)" }} onClick={() => exportData(csvParams)}>Export Customer Information</Button>
+                        </div>
 
                         <div className="ag-theme-material" style={{ width: 1645, height: 1000 }}>
-                            <AgGridReact rowData={customers} columnDefs={colDefs} pagination={true} paginationPageSize={20} />
+                            <AgGridReact ref={gridRef} rowData={customers} columnDefs={colDefs} pagination={true} paginationPageSize={20} />
                         </div>
                         <Snackbar open={openSnackbar} message={msgSnackbar} autoHideDuration={3000} onClose={() => setOpenSnackbar(false)}>
                         </Snackbar>
