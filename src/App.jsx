@@ -54,6 +54,12 @@ function App() {
               </Link>
             </MenuItem>
 
+            <MenuItem onClick={handleClose}>
+              <Link to="/TrainingsCalendar" style={{ textDecoration: 'none' }}>
+                Calendar
+              </Link>
+            </MenuItem>
+
           </Menu>
 
           <Typography sx={{ marginLeft: 6, marginTop: 3 }} variant="h4">
