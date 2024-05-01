@@ -42,23 +42,17 @@ function App() {
             }}
           >
 
-            <MenuItem onClick={handleClose}>
-              <Link to="/" style={{ textDecoration: 'none' }}>
-                Customers
-              </Link>
-            </MenuItem>
+            <Link to="/" style={{ textDecoration: 'none', color: "black" }}>
+              <MenuItem onClick={handleClose}>Customers</MenuItem>
+            </Link>
 
-            <MenuItem onClick={handleClose}>
-              <Link to="/TrainingsList" style={{ textDecoration: 'none' }}>
-                Trainings
-              </Link>
-            </MenuItem>
+            <Link to="/TrainingsList" style={{ textDecoration: 'none', color: "black" }}>
+              <MenuItem onClick={handleClose}>Trainings</MenuItem>
+            </Link>
 
-            <MenuItem onClick={handleClose}>
-              <Link to="/TrainingsCalendar" style={{ textDecoration: 'none' }}>
-                Calendar
-              </Link>
-            </MenuItem>
+            <Link to="/TrainingsCalendar" style={{ textDecoration: 'none', color: "black" }}>
+              <MenuItem onClick={handleClose}>Calendar</MenuItem>
+            </Link>
 
           </Menu>
 
