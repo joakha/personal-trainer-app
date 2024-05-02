@@ -14,7 +14,16 @@ const TrainingsList = () => {
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [msgSnackbar, setMsgSnackbar] = useState("");
     const [colDefs, setColDefs] = useState([
-        { field: "date", filter: true, floatingFilter: true, valueFormatter: params => new Date(params.value).toLocaleDateString("fi-FI") },
+        {
+            field: "date", filter: true, floatingFilter: true,
+            valueFormatter: params => {
+                const cellDate = new Date(params.value);
+                const formattedDate = cellDate.toLocaleDateString("fi-FI");
+                const hours = cellDate.getHours().toString().padStart(2, "0");
+                const minutes = cellDate.getMinutes().toString().padStart(2, "0");
+                return `${formattedDate} ${hours}:${minutes}`;
+            }
+        },
         { field: "duration", filter: true, floatingFilter: true, valueGetter: params => params.data.duration + " minutes" },
         { field: "activity", filter: true, floatingFilter: true },
         { headerName: "Customer Firstname", field: "customer.firstname", filter: true, floatingFilter: true },

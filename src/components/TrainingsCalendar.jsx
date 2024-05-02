@@ -33,13 +33,16 @@ const TrainingsCalendar = () => {
             trainingStartDate.setMinutes(trainingStartDate.getMinutes() + training.duration);
             const trainingEndDateIsoString = trainingStartDate.toISOString();
 
-            calendarEvents.push(
-                {
-                    title: `${training.activity} / ${training.customer.firstname} ${training.customer.lastname}`,
-                    start: new Date(training.date),
-                    end: new Date(trainingEndDateIsoString)
-                }
-            )
+            if (training.customer !== null) {
+                calendarEvents.push(
+                    {
+                        title: `${training.activity} / ${training.customer.firstname} ${training.customer.lastname}`,
+                        start: new Date(training.date),
+                        end: new Date(trainingEndDateIsoString)
+                    }
+                )
+            }
+
         })
 
         setEvents(calendarEvents);

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Select, MenuItem } from "@mui/material";
-import { DatePicker } from "@mui/x-date-pickers";
+import { DateTimePicker } from "@mui/x-date-pickers";
 
 const AddTraining = ({ addTraining }) => {
 
@@ -77,11 +77,13 @@ const AddTraining = ({ addTraining }) => {
                     <Dialog open={open}>
                         <DialogTitle>Add a new Training</DialogTitle>
                         <DialogContent>
-                            <DatePicker
+                            <DateTimePicker
                                 value={training.date}
                                 onChange={handleDate}
-                                format="DD-MM-YYYY"
-                                label="Date"
+                                format="DD/MM/YYYY HH:mm"
+                                views={['year', 'month', 'day', 'hours', 'minutes']}
+                                ampm={false}
+                                label="Date and Time"
                                 sx={{ marginTop: 1 }}
                             />
 
