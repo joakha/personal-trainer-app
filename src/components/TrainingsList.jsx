@@ -116,7 +116,7 @@ const TrainingsList = () => {
                         <>
                             <AddTraining addTraining={addTraining} />
 
-                            <div className="ag-theme-material" style={{ width: 1620, height: 1000 }}>
+                            <div className="ag-theme-material" style={{ width: 1200, height: 1000 }}>
 
                                 <AgGridReact rowData={trainings} columnDefs={colDefs} pagination={true} paginationPageSize={20} />
 

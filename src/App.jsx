@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar.jsx";
 import CustomerList from "./components/CustomerList.jsx";
 import TrainingsList from "./components/TrainingsList.jsx";
 import TrainingsCalendar from "./components/TrainingsCalendar.jsx";
+import TrainingsChart from "./components/TrainingsChart.jsx";
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<CustomerList />} />
         <Route path="/Trainings" element={<TrainingsList />} />
         <Route path="/Calendar" element={<TrainingsCalendar />} />
+        <Route path="/Chart" element={<TrainingsChart />} />
       </Routes>
     </>
   )

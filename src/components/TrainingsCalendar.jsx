@@ -23,6 +23,17 @@ const TrainingsCalendar = () => {
         locales,
     })
 
+    const displayEvents = async () => {
+        try {
+            const response = await fetch("https://customerrestservice-personaltraining.rahtiapp.fi/gettrainings");
+            const trainingsData = await response.json();
+            getEvents(trainingsData);
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
+
     const getEvents = (trainings) => {
 
         const calendarEvents = [];
@@ -49,17 +60,6 @@ const TrainingsCalendar = () => {
         setLoading(false);
     }
 
-    const displayEvents = async () => {
-        try {
-            const response = await fetch("https://customerrestservice-personaltraining.rahtiapp.fi/gettrainings");
-            const trainingsData = await response.json();
-            getEvents(trainingsData);
-        }
-        catch (error) {
-            console.error(error);
-        }
-    }
-
     useEffect(() => {
 
         displayEvents();
@@ -69,10 +69,11 @@ const TrainingsCalendar = () => {
     return (
         <Stack justifyContent="center" alignItems="center">
             <h1>Calendar</h1>
-            {loading ? <p>Loading Calendar...</p> :
-                <>
-                    <Calendar localizer={localizer} events={events} style={{ marginTop: 25, height: 900, width: 1500 }} />
-                </>
+            {
+                loading ? <p>Loading Calendar...</p> :
+                    <>
+                        <Calendar localizer={localizer} events={events} style={{ marginTop: 25, height: 900, width: 1500 }} />
+                    </>
             }
         </Stack >
     )

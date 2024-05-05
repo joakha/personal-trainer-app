@@ -54,6 +54,10 @@ const Navbar = () => {
                             <MenuItem onClick={handleClose}>Calendar</MenuItem>
                         </Link>
 
+                        <Link to="/Chart" style={{ textDecoration: 'none', color: "black" }}>
+                            <MenuItem onClick={handleClose}>Chart</MenuItem>
+                        </Link>
+
                     </Menu>
 
                     <Typography sx={{ marginLeft: 6, marginTop: 3 }} variant="h4">

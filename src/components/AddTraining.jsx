@@ -109,7 +109,7 @@ const AddTraining = ({ addTraining }) => {
 
                             <Select
                                 value={training.customer}
-                                sx={{marginTop: 3}}
+                                sx={{ marginTop: 3 }}
                                 onChange={handleSelect}
                                 displayEmpty
                             >
