@@ -34,10 +34,10 @@ const TrainingsChart = () => {
     const formatTrainingsData = (trainingsdata) => {
 
         const chartActivities = [];
-        const trainingsGroupedByName = _.groupBy(trainingsdata, (training) => training.activity);
+        const trainingsGroupedByActivity = _.groupBy(trainingsdata, (training) => training.activity);
 
         //tässä käsitellään groupBy -funktion tulos oikeaan muotoon forEach -silmukkaa varten
-        const groupedTrainingsArrays = Object.values(trainingsGroupedByName);
+        const groupedTrainingsArrays = Object.values(trainingsGroupedByActivity);
 
         groupedTrainingsArrays.forEach((arrayObjects) => {
 
