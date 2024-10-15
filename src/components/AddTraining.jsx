@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Select, MenuItem } from "@mui/material";
 import { DateTimePicker } from "@mui/x-date-pickers";
+import { apiURL } from "../constants/constants";
 
 const AddTraining = ({ addTraining }) => {
 
@@ -19,7 +20,7 @@ const AddTraining = ({ addTraining }) => {
 
         try {
             setLoading(true);
-            const response = await fetch("https://customerrestservice-personaltraining.rahtiapp.fi/api/customers");
+            const response = await fetch(apiURL + "customers");
             const customersData = await response.json();
             setCustomers(customersData._embedded.customers);
             setLoading(false)

@@ -7,6 +7,7 @@ import parse from 'date-fns/parse'
 import startOfWeek from 'date-fns/startOfWeek'
 import getDay from 'date-fns/getDay'
 import fi from 'date-fns/locale/fi'
+import { apiURL } from '../constants/constants'
 
 const TrainingsCalendar = () => {
 
@@ -25,7 +26,7 @@ const TrainingsCalendar = () => {
 
     const displayEvents = async () => {
         try {
-            const response = await fetch("https://customerrestservice-personaltraining.rahtiapp.fi/gettrainings");
+            const response = await fetch(apiURL + "gettrainings");
             const trainingsData = await response.json();
             getEvents(trainingsData);
         }

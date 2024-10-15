@@ -6,6 +6,7 @@ import { Stack, Button, Snackbar } from "@mui/material";
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import AddTraining from './AddTraining.jsx'
+import { apiURL } from "../constants/constants.js";
 
 const TrainingsList = () => {
 
@@ -39,7 +40,7 @@ const TrainingsList = () => {
 
         try {
             setLoading(true);
-            const response = await fetch("https://customerrestservice-personaltraining.rahtiapp.fi/gettrainings");
+            const response = await fetch(apiURL + "gettrainings");
             const trainingsData = await response.json();
             setTrainings(trainingsData);
             setLoading(false);
@@ -52,7 +53,7 @@ const TrainingsList = () => {
     const addTraining = async (training) => {
 
         try {
-            const response = await fetch("https://customerrestservice-personaltraining.rahtiapp.fi/api/trainings",
+            const response = await fetch(apiURL + "trainings",
                 { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(training) });
 
             if (response.ok) {
@@ -79,7 +80,7 @@ const TrainingsList = () => {
         if (confirm("Are you sure you want to delete this training?")) {
 
             try {
-                const response = await fetch(`https://customerrestservice-personaltraining.rahtiapp.fi/api/trainings/${params.data.id}`, { method: "DELETE" });
+                const response = await fetch(`${apiURL}trainings/${params.data.id}`, { method: "DELETE" });
 
                 if (response.ok) {
                     setMsgSnackbar("Training deleted successfully");
@@ -100,9 +101,7 @@ const TrainingsList = () => {
     }
 
     useEffect(() => {
-
         getTrainings();
-
     }, [])
 
     return (

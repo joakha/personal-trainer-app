@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react"
 import { AgGridReact } from "ag-grid-react"
+import { apiURL } from "../constants/constants";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
 import { Stack, Snackbar, Button } from "@mui/material";
@@ -42,11 +43,13 @@ const CustomerList = () => {
     ]
     );
 
+    const customerURL = apiURL + "customers";
+
     const getCustomers = async () => {
 
         try {
             setLoading(true);
-            const response = await fetch("https://customerrestservice-personaltraining.rahtiapp.fi/api/customers");
+            const response = await fetch(customerURL);
             const customersData = await response.json();
             setCustomers(customersData._embedded.customers);
             setLoading(false);
@@ -60,7 +63,7 @@ const CustomerList = () => {
     const addCustomer = async (customer) => {
 
         try {
-            const response = await fetch("https://customerrestservice-personaltraining.rahtiapp.fi/api/customers",
+            const response = await fetch(customerURL,
                 { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(customer) });
 
             if (response.ok) {
@@ -136,9 +139,7 @@ const CustomerList = () => {
     }
 
     useEffect(() => {
-
         getCustomers();
-
     }, [])
 
     return (

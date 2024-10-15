@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Cell } from 'recharts';
 import { Stack } from '@mui/material';
 import _ from 'lodash';
+import { apiURL } from '../constants/constants';
 
 const TrainingsChart = () => {
 
@@ -22,7 +23,7 @@ const TrainingsChart = () => {
 
     const displayChartData = async () => {
         try {
-            const response = await fetch("https://customerrestservice-personaltraining.rahtiapp.fi/api/trainings");
+            const response = await fetch(apiURL + "trainings");
             const trainingsData = await response.json();
             formatTrainingsData(trainingsData._embedded.trainings);
         }

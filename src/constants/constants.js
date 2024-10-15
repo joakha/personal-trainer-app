@@ -1,0 +1,1 @@
+export const apiURL = "https://customer-rest-service-frontend-personaltrainer.2.rahtiapp.fi/api/";
