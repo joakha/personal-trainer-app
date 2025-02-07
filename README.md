@@ -8,10 +8,10 @@ Live version deployed here: https://joakha.github.io/personal-trainer-app/
 
 ## Application Screenshots
 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  <img src="./pictures/customerlist.png" width="50%" />
-  <img src="./pictures/traininglist.png" width="50%" />
-  <img src="./pictures/calendar.png" alt="Add Customer" width="50%" />
-  <img src="./pictures/chart.png" alt="Home Page" width="50%" />
+  <img src="./pictures/customerlist.png" width="45%" />
+  <img src="./pictures/traininglist.png" width="45%" />
+  <img src="./pictures/calendar.png" alt="Add Customer" width="45%" />
+  <img src="./pictures/chart.png" alt="Home Page" width="45%" />
 </div>
 
 ## Features
@@ -37,7 +37,7 @@ sort and filter trainings based on selected criteria.
     ```sh
     npm run dev
     ```
-    
+
 ## Dependencies
 
 ### UI & Styling:
